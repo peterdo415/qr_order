@@ -1,0 +1,9 @@
+<% @order_units.each do |order_unit| %>
+              <tr>
+                <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 whitespace-nowrap sm:pl-6"><%= order_unit.id %></td>
+                <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap"><%= order_unit.code %></td>
+                <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap"><%= order_unit.qrcode %></td>
+                <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap"><%= l order_unit.created_at, format: :long %></td>
+                <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap"><%= order_unit.order.present? ? l(order_unit.order&.paid_at, format: :long) : '' %></td>
+              </tr>
+<% end %>

@@ -68,6 +68,9 @@ GEM
       tzinfo (~> 2.0)
     addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    annotate (3.2.0)
+      activerecord (>= 3.2, < 8.0)
+      rake (>= 10.4, < 14.0)
     ast (2.4.2)
     bindex (0.8.1)
     bootsnap (1.15.0)
@@ -82,6 +85,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    chunky_png (1.4.0)
     concurrent-ruby (1.1.10)
     crass (1.0.6)
     cssbundling-rails (1.1.2)
@@ -186,6 +190,10 @@ GEM
     reline (0.3.2)
       io-console (~> 0.5)
     rexml (3.2.5)
+    rqrcode (2.1.2)
+      chunky_png (~> 1.0)
+      rqrcode_core (~> 1.0)
+    rqrcode_core (1.2.0)
     rspec-core (3.12.0)
       rspec-support (~> 3.12.0)
     rspec-expectations (3.12.1)
@@ -265,6 +273,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  annotate
   bootsnap
   capybara
   cssbundling-rails
@@ -277,6 +286,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rails (~> 7.0.3)
   redis (~> 4.0)
+  rqrcode
   rspec-rails
   rubocop
   rubocop-rails
