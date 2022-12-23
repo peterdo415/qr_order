@@ -1,4 +1,23 @@
-<% @order_units.each do |order_unit| %>
+<div class="container p-5 mx-auto">
+  <div class="flex flex-col mt-8">
+    <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+      <div class="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+        <div class="mb-3 text-right">
+          <%= button_to 'QRを発行', admin_order_units_path, class: 'btn btn-primary', form: { data: {turbo_confirm: 'QRを作成します'}} %>
+        </div>
+        <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+          <table class="min-w-full divide-y divide-gray-300">
+            <thead class="bg-gray-50">
+            <tr>
+              <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6">id</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">code</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">image</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">発行日時</th>
+              <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">会計日時</th>
+            </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+            <% @order_units.each do |order_unit| %>
               <tr>
                 <td class="py-4 pl-4 pr-3 text-sm font-medium text-gray-900 whitespace-nowrap sm:pl-6"><%= order_unit.id %></td>
                 <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap"><%= order_unit.code %></td>
@@ -6,4 +25,11 @@
                 <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap"><%= l order_unit.created_at, format: :long %></td>
                 <td class="px-3 py-4 text-sm text-gray-500 whitespace-nowrap"><%= order_unit.order.present? ? l(order_unit.order&.paid_at, format: :long) : '' %></td>
               </tr>
-<% end %>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
