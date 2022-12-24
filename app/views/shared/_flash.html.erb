@@ -1,0 +1,12 @@
+<% if flash.any? %>
+  <div class="m-10">
+    <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %> shadow-lg">
+        <div>
+          <span><%= message %></span>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+

@@ -55,3 +55,33 @@ css: yarn build:css --watch
 ## The asset "application.css" is not present in the asset pipeline.について
 今回の場合、
 bin/dev ではなく bin/rails s になっていた -> foremanが使われてなかった -> Procfile.devに書かれてる処理は実行されない -> つまり yarn build:cssも実行されない -> cssがビルドされない -> application.css も生成されない -> The asset "application.css" is not present in the asset pipeline. のエラーが出た
+
+## 【Rails】'ArgumentError (Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true):'が出たときの対処法
+
+```
+# config/environment/development.rb
+ host = 'localhost' #←先ほどの上のコードのhost名と合わせる
+ Rails.application.routes.default_url_options[:host] = host
+ ```
+
+## ActiveRecord
+* Railsが採用している ORM (Object RDB Mapper)
+* ModelとDBの間でRuby → SQL に翻訳をしてくれる
+
+基本的にDBにはDB言語としてSQLが使われており、
+SQLでないとDBの操作ができないが、RailsにはModelにActiveRecordが適用されているおかげで、Rubyを用いてDBからデータを探したり、持ってきたりすることができる。
+(厳密にはModelにApplicationRecordを介してActiveRecordが適用されているため)
+
+## tailwind JIT
+* tailwindの3系からのJITモードではhtmlのclassをパースし使用しているクラスのみCSSをコンパイルするためclassに変数を使用するとtailwind側からするとそんなスタイルねえって感じ
+* 人間的には alert-<%= message_type %>の変化後の alert-sucess のような完全な文字列をコンパイルしてほしいが、tailwindはalert-<%= message_type %> をまんまコンパイルしようとしているからこのようなことが起きる？
+
+## number_to_currencyメソッド
+* 数値を通貨のフォーマットに変換
+`number_to_currency(数値, オプション={})`
+### :precisionオプション
+* 小数以下の桁数
+`precision: 0`
+### :unitオプション
+* 通貨単位
+`unit: '¥'`

@@ -1,0 +1,27 @@
+<div class="container max-w-lg p-5 mx-auto border">
+  <div data-controller="order-submit">
+    <%= form_with model: @order_form,
+                  url: order_unit_orders_path(current_order_unit),
+                  html: { 'data-turbo-confirm': "注文します" } do |f| %>
+      <div>
+        <% Drink.all.each_with_index do |drink, index| %>
+          <div data-controller="order-count", class="flex items-center justify-between gap-4 p-3 mb-3 border-b">
+            <div>
+              <%= drink.name %>
+            </div>
+            <div class="ml-auto">
+              <%= number_to_currency(drink.price, precision:0, unit: '¥') %>
+            </div>
+            <div class="flex items-center gap-3">
+              <button data-action="click->order-count#minus" class="btn btn-sm">-</button>
+              <button data-action="click->order-count#plus" class="btn btn-sm">+</button>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <div class="text-right">
+        <%= f.submit '注文', class: 'btn btn-primary px-10', 'data-order-submit-target': 'submit' %>
+      </div>
+    <% end %>
+  </div>
+</div>
