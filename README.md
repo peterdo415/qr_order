@@ -8,7 +8,7 @@
 
 
 ```
-class ApplicationController < ActionController::Base
+class Admin::BaseController < ApplicationController
   before_action :basic_auth
 
   private
