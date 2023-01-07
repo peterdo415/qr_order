@@ -113,3 +113,40 @@ SQLでないとDBの操作ができないが、RailsにはModelにActiveRecord�
 ### ページのbuttonタグが全てsubmitするようになった
 * button の type 属性の初期値が type="submit"
 https://zenn.dev/phi/articles/form-submit-button-type-default#submit-%E3%81%99%E3%82%8B%E3%83%9C%E3%82%BF%E3%83%B3
+
+## formオブジェクト
+* モデルとフォームの責務を切り分けられる事で、単体のモデルに依存しない場合や、フォーム専用の特別な処理をモデルに書きたくない場合に用いたりする
+* 1つのフォームで複数モデルの操作をしたいときにForm Objectを使うと、処理がすっきりかける。またログインに関する処理など、特定のフォームでしか行わない処理もForm Objectに書くと良い
+
+今回は
+1. drinksからorder_unitsに注文を入れていく
+2. order_unitsからordersに情報が入り、お会計が完了する
+
+これより、1つのフォームで複数のモデルの操作をしている？のでformオブジェクトを使う理由になるのかなと思いました。またお店のHPにこの注文フォームを組み込むとしたら、このフォームは特定でしか行わない処理だと思うのでこれも当てはまりそうな気がしました。
+
+## ApplicationRecordの継承の有無
+* application_record.rbを継承する
+
+### primary_abstract_classメソッド
+* `ActiveRecord::Base`を継承するクラスを指定するため？
+
+つまりActiveRecord::Baseを継承していないため、モデルとテーブルをつなぎ合わせることでRailsからテーブルのレコードにアクセスできるようにする役割があるActiveRecordを扱えない
+
+## テーブルがないモデルの書き方
+```
+# 通常のモデルのようにvalidationなどを使えるようにする
+include ActiveModel::Model
+# ActiveRecordのカラムのような属性を加えられるようにする
+include ActiveModel::Attributes
+```
+
+### まとめ
+* テーブルがないモデルはformオブジェクトというテクニック
+* モデルの振る舞いをさせるため2行ほどincludeでの記述が必要
+* ActiveRecordを扱えない
+* 1つのフォームで複数モデルの操作をしたいとき
+* 大きなアプリではmodelsディレクトリの肥大化を少し抑えれる？
+* formオブジェクト内にメソッドを定義できるのでモデル自体の肥大化も抑えられる？
+
+## positive?メソッド
+self が 0 より大きい場合に true を返す。そうでない場合に false を返す
