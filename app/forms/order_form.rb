@@ -4,7 +4,7 @@ class OrderForm
   attribute :order
   attribute :order_detail
 
-  class OrderDetails
+  class OrderDetail
     include ActiveModel::Model
     include ActiveModel::Attributes
     attribute :order
@@ -14,17 +14,26 @@ class OrderForm
 
     def save!
       count.times do
-        ::OrderDetails.create!(order:, drink_id:)
+        ::OrderDetail.create!(order:, drink_id:)
       end
     end
   end
 
-  
+  def initialize(order_unit:, order_params:)
+    @order = order_unit.order || order_unit.build_order
+    order_details = []
+    order_params.select { |_, order_attribute| order_attribute[:count].to_i.positive? }.each do |_, order_attribute|
+      order_details << OrderForm::OrderDetail.new(drink_id: order_attribute[:drink_id],
+                                                  count: order_attribute[:count].to_i, order: @order)
+    end
+    @order_details = order_details
+  end
+
   def create!
     ActiveRecord::Base.transaction do
       @order.save! if @order.new_record?
 
-      @order_unit.each(&:save!)
+      @order_details.each(&:save!)
     end
   end
 end

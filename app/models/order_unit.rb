@@ -12,7 +12,7 @@
 #  index_order_units_on_code  (code) UNIQUE
 #
 class OrderUnit < ApplicationRecord
-  has_one :order, dependent: :destroy
+  has_one :order, dependent: :restrict_with_error
 
   validates :code, presence: true
 
@@ -25,5 +25,9 @@ class OrderUnit < ApplicationRecord
       standalone: true,
       use_path: true
     ).html_safe # rubocop:disable Rails/OutputSafety
+  end
+
+  def to_param
+    code
   end
 end

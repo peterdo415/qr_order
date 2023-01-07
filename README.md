@@ -85,3 +85,31 @@ SQLでないとDBの操作ができないが、RailsにはModelにActiveRecord�
 ### :unitオプション
 * 通貨単位
 `unit: '¥'`
+
+## form内のbutton要素が全てsubmitされる
+* button の type 属性の初期値が 'type="submit"'
+* 'type='button'`で明示的に表記すると安全
+
+
+## stimulusのコントローラ
+### data-controller
+* HTMLにコントローラーを割り当てている
+### data-action
+* ボタンがクリックされたら、~~コントローラーの ~~~メソッドを呼びますよ、という指定
+`<button data-action="click->order-count#minus" class="btn btn-sm">-</button>`
+クリックされたら、order_countのminusメソッドを呼ぶ
+### data-target
+* DOMへの参照を得ることができる
+* JSの中から要素を簡単に呼び出せるようにしている
+* これによって、JSで必要になる要素をいちいち探してくる必要がなくなる
+
+## コードについて
+### <%= hidden_field_tag "orders[#{index}][drink_id]", drink.id %>
+* drink.id を orders の配列の要素として値を設定
+
+### <%= hidden_field_tag "orders[#{index}][count]", 0, 'data-order-count-target': 'count' %>
+* data-order-count-target 属性を指定して、0 を orders の配列の要素として値を設定
+
+### ページのbuttonタグが全てsubmitするようになった
+* button の type 属性の初期値が type="submit"
+https://zenn.dev/phi/articles/form-submit-button-type-default#submit-%E3%81%99%E3%82%8B%E3%83%9C%E3%82%BF%E3%83%B3

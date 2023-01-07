@@ -1,0 +1,10 @@
+<footer class="fixed inset-x-0 bottom-0 bg-white">
+  <ul class="flex flex-row items-center justify-center flex-1 text-center">
+    <li class="border border-r-0 basis-1/3">
+      <%= link_to '注文', order_unit_path(current_order_unit), class: 'p-5 block' %>
+    </li>
+    <li class="border border-r-0 basis-1/3">
+      <%= link_to '注文履歴', order_unit_order_histories_path(current_order_unit), class: 'p-5 block' %>
+    </li>
+  </ul>
+</footer>

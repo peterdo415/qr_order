@@ -7,6 +7,6 @@ Rails.application.routes.draw do
     resources :orders, only: :create, module: :order_units do
       resource :complete, only: :create, module: :orders
     end
-    resources :order_history, only: :index, module: :order_units
+    resources :order_histories, only: :index, module: :order_units
   end
 end

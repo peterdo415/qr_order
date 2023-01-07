@@ -1,11 +1,11 @@
 <div class="container max-w-lg p-5 mx-auto border">
-  <div data-controller="order-submit">
+  <div data-controller="order-submit" data-action="order-count:changed->order-submit#toggleDisabled">
     <%= form_with model: @order_form,
                   url: order_unit_orders_path(current_order_unit),
                   html: { 'data-turbo-confirm': "注文します" } do |f| %>
       <div>
         <% Drink.all.each_with_index do |drink, index| %>
-          <div data-controller="order-count", class="flex items-center justify-between gap-4 p-3 mb-3 border-b">
+          <div data-controller="order-count" data-order-submit-target="item" data-order-count-num-value="0" class="flex items-center justify-between gap-4 p-3 mb-3 border-b">
             <div>
               <%= drink.name %>
             </div>
@@ -14,7 +14,10 @@
             </div>
             <div class="flex items-center gap-3">
               <button data-action="click->order-count#minus" class="btn btn-sm">-</button>
+              <span data-order-count-target="view" class="text-3xl w-[30px] text-center">0</span>
               <button data-action="click->order-count#plus" class="btn btn-sm">+</button>
+              <%= hidden_field_tag "orders[#{index}][drink_id]", drink.id %>
+              <%= hidden_field_tag "orders[#{index}][count]", 0, 'data-order-count-target': 'count' %>
             </div>
           </div>
         <% end %>
