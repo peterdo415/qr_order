@@ -10,7 +10,7 @@
 #
 FactoryBot.define do
   factory :drink do
-    name { "MyString" }
+    name { 'MyString' }
     price { 1 }
   end
 end

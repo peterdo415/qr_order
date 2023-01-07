@@ -17,10 +17,10 @@ class OrderUnit < ApplicationRecord
   validates :code, presence: true
 
   def qrcode
-    qrcode = RQRCode::QRCode.new("https://github.com/")
-    svg = qrcode.as_svg(
-      color: "000",
-      shape_rendering: "crispEdges",
+    qrcode = RQRCode::QRCode.new('https://github.com/')
+    qrcode.as_svg(
+      color: '000',
+      shape_rendering: 'crispEdges',
       module_size: 6,
       standalone: true,
       use_path: true

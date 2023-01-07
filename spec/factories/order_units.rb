@@ -13,6 +13,6 @@
 #
 FactoryBot.define do
   factory :order_unit do
-    code { "MyString" }
+    code { 'MyString' }
   end
 end

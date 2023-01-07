@@ -21,8 +21,8 @@
 FactoryBot.define do
   factory :order do
     order_unit { nil }
-    total_without_tax { "9.99" }
-    total_with_tax { "9.99" }
-    paid_at { "2022-12-21 21:26:34" }
+    total_without_tax { '9.99' }
+    total_with_tax { '9.99' }
+    paid_at { '2022-12-21 21:26:34' }
   end
 end
