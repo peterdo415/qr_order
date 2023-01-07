@@ -21,6 +21,9 @@ class Admin::BaseController < ApplicationController
 end
 ```
 
+## QR生成
+https://qiita.com/koteko/items/d6d033997c544c47b718
+
 ## foreman
 * foremanは、複数のプロセスをまとめて管理するツール
 * アプリの外部にあるProcfileというファイルに設定を書き込むと、WEBアプリの立ち上げに必要なさまざまなプロセスを一気に立ち上げることができる
@@ -150,3 +153,6 @@ include ActiveModel::Attributes
 
 ## positive?メソッド
 self が 0 より大きい場合に true を返す。そうでない場合に false を返す
+
+## helper_method
+コントローラ側で`helper_method: メソッド名`とすることでコントローラーで定義したメソッドをビューでも使える
