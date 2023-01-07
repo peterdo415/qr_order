@@ -143,8 +143,8 @@ include ActiveModel::Model
 include ActiveModel::Attributes
 ```
 
-### まとめ
-* テーブルがないモデルはformオブジェクトというテクニック
+### formオブジェクトまとめ
+* テーブルがなくフォームを補完するモデルはformオブジェクトというテクニック
 * モデルの振る舞いをさせるため2行ほどincludeでの記述が必要
 * ActiveRecordを扱えない
 * 1つのフォームで複数モデルの操作をしたいとき
