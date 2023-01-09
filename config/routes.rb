@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  namespace :admin do
+    resources :order_units, only: [:index, :create]
+  end
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  resources :order_units, only: [:show], param: :code do
+    resources :orders, only: :create, module: :order_units do
+      resource :complete, only: :create, module: :orders
+    end
+    resources :order_histories, only: :index, module: :order_units
+  end
 end

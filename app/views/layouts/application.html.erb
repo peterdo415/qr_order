@@ -11,6 +11,14 @@
   </head>
 
   <body>
-    <%= yield %>
+    <main class="py-[100px]">
+      <%= render 'shared/flash' %>
+      <%= yield %>
+    </main>
+
+    <%#= だいぶ無理やり %>
+    <% if controller.controller_path.split('/')[0] != 'admin' %>
+      <%= render 'shared/footer' %>
+    <% end %>
   </body>
 </html>

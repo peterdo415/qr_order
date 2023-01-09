@@ -33,5 +33,12 @@ module QrOrder
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.generators do |g|
+      g.assets false          # assetファイルの作成をスキップ
+      g.skip_routes false     # route追加をスキップ
+      g.test_framework false  # testファイルの作成をスキップ
+      g.helper false          # helper以下にファイルを作成しない
+    end
   end
 end
